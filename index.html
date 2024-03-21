@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Password Guess Game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <div id="app">
+        <div class="terminal" v-html="terminal">
+        </div>
+        <div class="numpad">
+          <button v-for="n in 9" @click="key(n)">{{ n }}</button>
+          <button @click="key(0)">0</button>
+          <button @click="key('Enter')" class="enter">Enter ←</button>
+        </div>
+      </div>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="passwordguess.js"></script> 
+      <script src="gameapp.js"></script>
+    </body>
+</html>
