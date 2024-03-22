@@ -13,7 +13,7 @@
         <div class="numpad">
           <button v-for="n in 9" @click="key(n)">{{ n }}</button>
           <button @click="key(0)">0</button>
-          <button @click="key('Enter')" class="enter">Enter ←</button>
+          <button @click="key('Enter')" class="enter" :disabled="!enterable">Enter ←</button>
         </div>
       </div>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
