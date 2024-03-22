@@ -32,6 +32,10 @@ div.numpad button {
   font-size: 2rem;
   cursor: pointer;
 }
+div.numpad button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 div.numpad button.enter {
   grid-column: span 2;
 }

@@ -28,7 +28,4 @@ function PasswordGuess(){
 }
 
 let p = new PasswordGuess();
-p.password = '1234';
-console.log(p.guess('1212')) // 2B 0C
-console.log(p.guess('1002')) // 1B 1C
-console.log(p.guess('1234')) // 4B 0C
+
