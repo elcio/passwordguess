@@ -4,6 +4,7 @@
         game: new PasswordGuess(),
         log: [],
         guess: '',
+        enterable: false,
       }
     },
     computed: {
@@ -18,25 +19,30 @@
     methods: {
       key(n) {
         if (n === 'Enter') {
-          let result = this.game.guess(this.guess);
-          this.log.push(`
-            <span class="prompt">#${this.game.attempts}:</span>
-            <strong>${this.guess} </strong> -
-            <span class="bulls">${result.bulls}</span>B
-            <span class="cows">${result.cows}</span>C
-          `);
-          this.guess = '';
-          if(result.bulls === 4) {
+          if (this.guess.length >= 4) {
+            let result = this.game.guess(this.guess);
             this.log.push(`
-              <span class="bulls">Congratulations!</span><br>
-              You cracked the password in ${this.game.attempts} attempts.
+              <span class="prompt">#${this.game.attempts}:</span>
+              <strong>${this.guess} </strong> -
+              <span class="bulls">${result.bulls}</span>B
+              <span class="cows">${result.cows}</span>C
             `);
-            this.game = new PasswordGuess();
+            this.guess = '';
+            if(result.bulls === 4) {
+              this.log.push(`
+                <span class="bulls">Congratulations!</span><br>
+                You cracked the password in ${this.game.attempts} attempts.<br>
+              `);
+              this.game = new PasswordGuess();
+            }
           }
+        } else if (n === 'Backspace') {
+          this.guess = this.guess.slice(0, -1).slice(-4);
         } else {
           this.guess += n;
           this.guess = this.guess.slice(-4);
         }
+        this.enterable = this.guess.length >= 4;
       }
     },
     mounted() {
@@ -48,7 +54,7 @@
         <span class="cows">C</span> means correct number but wrong position.<br>
       `);
       window.addEventListener('keydown', e => {
-        if (e.key >= '0' && e.key <= '9' || e.key === 'Enter') {
+        if (e.key >= '0' && e.key <= '9' || e.key === 'Enter' || e.key === 'Backspace') {
           this.key(e.key);
         }
       });
